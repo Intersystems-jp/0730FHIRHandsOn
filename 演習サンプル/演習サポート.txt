@@ -1,0 +1,629 @@
+*****************************************************
+	FHIRハンズオン　演習サポートファイル
+ 	(2021/7/21作成)
+
+ 	コピー元にご利用ください。
+*****************************************************
+
+《共通情報》
+
+(1)　管理ポータルへのURL
+
+http://localhost:52773/csp/sys/UtilHome.csp
+
+
+(2)　管理ポータルにアクセスするユーザ名とパスワード
+
+ユーザ名：　SuperUser
+パスワード：　SYS
+※パスワードは大文字で設定しています。
+
+
+(3)　FHIRリポジトリ用ネームスペース名
+
+R4FHIRNAMESPACE
+
+※　FHIRエンドポイントの作成時に指定する名称です。
+※　管理ポータルの「クラス」メニューや「Interoperability」メニューを操作するときに指定するネームスペース名です。
+
+
+*****************************************************
+
+
+〇演習資料P6　の画面入力内容
+
+R4FHIRNAMESPACE
+
+-----------------------------
+
+〇演習資料P11　PatientリソースのGET要求
+
+・URL
+http://localhost:52773/csp/healthshare/r4fhirnamespace/fhir/r4/Patient
+
+・HeadersのKey
+Accept
+
+・HeadersのValue
+application/fhir+json
+
+-----------------------------
+
+〇演習資料P12　PatientリソースのPOST要求
+
+・URL
+http://localhost:52773/csp/healthshare/r4fhirnamespace/fhir/r4/Patient
+
+・HeadersのKey
+Content-Type
+
+・HeadersのValue
+application/fhir+json;charset=utf-8
+
+・Body
+演習サンプル\SampleResource\test_Patient.json　の中身、または以下JSONをコピーして貼り付けます。
+
+{
+    "resourceType": "Patient",
+    "address": [
+      {
+        "postalCode": "1600023",
+        "text": "東京都新宿区西新宿6丁目"
+      }
+    ],
+    "birthDate": "1970-01-01",
+    "gender": "male",
+    "identifier": [
+      {
+        "value": "1001"
+      }
+    ],
+    "name": [
+      {
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/iso21090-EN-representation",
+            "valueCode": "IDE"
+          }
+        ],
+        "use": "official",
+        "text": "山田 太郎",
+        "family": "山田",
+        "given": [
+          "太郎"
+        ]
+      },
+      {
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/iso21090-EN-representation",
+            "valueCode": "SYL"
+          }
+        ],
+        "use": "official",
+        "text": "ヤマダ タロウ",
+        "family": "ヤマダ",
+        "given": [
+          "タロウ"
+        ]
+      }
+    ],
+    "telecom": [
+      {
+        "value": "0312345678"
+      }
+    ]
+  }
+
+
+
+-----------------------------
+
+〇演習資料P13　PatientリソースのGET要求
+
+・URL
+http://localhost:52773/csp/healthshare/r4fhirnamespace/fhir/r4/Patient
+
+・HeadersのKey
+Accept
+
+・HeadersのValue
+application/fhir+json
+
+
+-----------------------------
+
+
+〇演習資料P14　Patient/1のGET要求
+
+・URL
+http://localhost:52773/csp/healthshare/r4fhirnamespace/fhir/r4/Patient/1
+
+・HeadersのKey
+Accept
+
+・HeadersのValue
+application/fhir+json
+
+-----------------------------
+
+
+〇演習資料P19　ObservationリソースのPOST要求
+
+・URL
+http://localhost:52773/csp/healthshare/r4fhirnamespace/fhir/r4/Observation
+
+
+・HeadersのKey
+Content-Type
+
+・HeadersのValue
+application/fhir+json;charset=utf-8
+
+・Body
+演習サンプル\SampleResource\test_Observartion_Refer_Patient_1.json　の中身、または以下JSONをコピーして貼り付けます。
+
+{
+    "resourceType": "Observation",
+    "meta": {
+      "profile": [
+        "http://hl7.org/fhir/StructureDefinition/vitalsigns"
+      ]
+    },
+    "text": {
+      "status": "generated",
+      "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative with Details</b></p><p><b>id</b>: satO2</p><p><b>meta</b>: </p><p><b>identifier</b>: o1223435-10</p><p><b>partOf</b>: <a>Procedure/ob</a></p><p><b>status</b>: final</p><p><b>category</b>: Vital Signs <span>(Details : {http://terminology.hl7.org/CodeSystem/observation-category code 'vital-signs' = 'Vital Signs', given as 'Vital Signs'})</span></p><p><b>code</b>: Oxygen saturation in Arterial blood <span>(Details : {LOINC code '2708-6' = 'Oxygen saturation in Arterial blood', given as 'Oxygen saturation in Arterial blood'}; {LOINC code '59408-5' = 'Oxygen saturation in Arterial blood by Pulse oximetry', given as 'Oxygen saturation in Arterial blood by Pulse oximetry'}; {urn:iso:std:iso:11073:10101 code '150456' = '150456', given as 'MDC_PULS_OXIM_SAT_O2'})</span></p><p><b>subject</b>: <a>Patient/example</a></p><p><b>effective</b>: 05/12/2014 9:30:10 AM</p><p><b>value</b>: 95 %<span> (Details: UCUM code % = '%')</span></p><p><b>interpretation</b>: Normal (applies to non-numeric results) <span>(Details : {http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation code 'N' = 'Normal', given as 'Normal'})</span></p><p><b>device</b>: <a>DeviceMetric/example</a></p><h3>ReferenceRanges</h3><table><tr><td>-</td><td><b>Low</b></td><td><b>High</b></td></tr><tr><td>*</td><td>90 %<span> (Details: UCUM code % = '%')</span></td><td>99 %<span> (Details: UCUM code % = '%')</span></td></tr></table></div>"
+    },
+    "identifier": [
+      {
+        "system": "http://goodcare.org/observation/id",
+        "value": "o1223435-10"
+      }
+    ],
+    "partOf": [
+      {
+        "reference": "Procedure/ob"
+      }
+    ],
+    "status": "final",
+    "category": [
+      {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+            "code": "vital-signs",
+            "display": "Vital Signs"
+          }
+        ],
+        "text": "Vital Signs"
+      }
+    ],
+    "code": {
+      "coding": [
+        {
+          "system": "http://loinc.org",
+          "code": "2708-6",
+          "display": "Oxygen saturation in Arterial blood"
+        },
+        {
+          "system": "http://loinc.org",
+          "code": "59408-5",
+          "display": "Oxygen saturation in Arterial blood by Pulse oximetry"
+        },
+        {
+          "system": "urn:iso:std:iso:11073:10101",
+          "code": "150456",
+          "display": "MDC_PULS_OXIM_SAT_O2"
+        }
+      ]
+    },
+    "subject": {
+      "reference": "Patient/1"
+    },
+    "effectiveDateTime": "2021-03-15T17:30:10+01:00",
+    "valueQuantity": {
+      "value": 95,
+      "unit": "%",
+      "system": "http://unitsofmeasure.org",
+      "code": "%"
+    },
+    "interpretation": [
+      {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+            "code": "N",
+            "display": "Normal"
+          }
+        ],
+        "text": "Normal (applies to non-numeric results)"
+      }
+    ],
+    "device": {
+      "reference": "DeviceMetric/example"
+    },
+    "referenceRange": [
+      {
+        "low": {
+          "value": 90,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        },
+        "high": {
+          "value": 99,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      }
+    ]
+  }
+
+
+
+-----------------------------
+
+〇演習資料P20　ObservationのGET要求
+
+・URL
+http://localhost:52773/csp/healthshare/r4fhirnamespace/fhir/r4/Observation
+
+・HeadersのKey
+Accept
+
+・HeadersのValue
+application/fhir+json
+
+
+-----------------------------
+
+〇演習資料P21　Patient/1/$everythingのGET要求
+
+・URL
+http://localhost:52773/csp/healthshare/r4fhirnamespace/fhir/r4/Patient/1/$everything
+
+・HeadersのKey
+Accept
+
+・HeadersのValue
+application/json+fhir
+
+
+-----------------------------
+
+〇演習資料P25　BundleリソースのPOST要求
+
+・URL
+http://localhost:52773/csp/healthshare/r4fhirnamespace/fhir/r4/
+
+・HeadersのKey
+Content-Type
+
+・HeadersのValue
+application/fhir+json;charset=utf-8
+
+・Body
+演習サンプル\SampleResource\test_Bundle_Patient_Observation.json の中身、または以下JSONをコピーして貼り付けます。
+
+{
+    "resourceType": "Bundle",
+    "type": "transaction",
+    "entry": [
+        {
+            "resource": {
+                "resourceType": "Patient",
+                    "address": [
+                        {
+                        "postalCode": "1600023",
+                        "text": "東京都新宿区西新宿6丁目"
+                        }
+                    ],
+                    "birthDate": "1970-01-01",
+                    "gender": "male",
+                    "identifier": [
+                        {
+                        "value": "1001"
+                        }
+                    ],
+                    "name": [
+                        {
+                        "extension": [
+                            {
+                            "url": "http://hl7.org/fhir/StructureDefinition/iso21090-EN-representation",
+                            "valueCode": "IDE"
+                            }
+                        ],
+                        "use": "official",
+                        "text": "山田 太郎",
+                        "family": "山田",
+                        "given": [
+                            "太郎"
+                        ]
+                        },
+                        {
+                        "extension": [
+                            {
+                            "url": "http://hl7.org/fhir/StructureDefinition/iso21090-EN-representation",
+                            "valueCode": "SYL"
+                            }
+                        ],
+                        "use": "official",
+                        "text": "ヤマダ タロウ",
+                        "family": "ヤマダ",
+                        "given": [
+                            "タロウ"
+                        ]
+                        }
+                    ],
+                    "telecom": [
+                        {
+                        "value": "0120171972"
+                        }
+                    ],
+            "id": "1"
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Patient/1"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "meta": {
+                    "profile": [
+                        "http://hl7.org/fhir/StructureDefinition/vitalsigns"
+                    ]
+                },
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative with Details</b></p><p><b>id</b>: satO2</p><p><b>meta</b>: </p><p><b>identifier</b>: o1223435-10</p><p><b>partOf</b>: <a>Procedure/ob</a></p><p><b>status</b>: final</p><p><b>category</b>: Vital Signs <span>(Details : {http://terminology.hl7.org/CodeSystem/observation-category code 'vital-signs' = 'Vital Signs', given as 'Vital Signs'})</span></p><p><b>code</b>: Oxygen saturation in Arterial blood <span>(Details : {LOINC code '2708-6' = 'Oxygen saturation in Arterial blood', given as 'Oxygen saturation in Arterial blood'}; {LOINC code '59408-5' = 'Oxygen saturation in Arterial blood by Pulse oximetry', given as 'Oxygen saturation in Arterial blood by Pulse oximetry'}; {urn:iso:std:iso:11073:10101 code '150456' = '150456', given as 'MDC_PULS_OXIM_SAT_O2'})</span></p><p><b>subject</b>: <a>Patient/example</a></p><p><b>effective</b>: 05/12/2014 9:30:10 AM</p><p><b>value</b>: 95 %<span> (Details: UCUM code % = '%')</span></p><p><b>interpretation</b>: Normal (applies to non-numeric results) <span>(Details : {http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation code 'N' = 'Normal', given as 'Normal'})</span></p><p><b>device</b>: <a>DeviceMetric/example</a></p><h3>ReferenceRanges</h3><table><tr><td>-</td><td><b>Low</b></td><td><b>High</b></td></tr><tr><td>*</td><td>90 %<span> (Details: UCUM code % = '%')</span></td><td>99 %<span> (Details: UCUM code % = '%')</span></td></tr></table></div>"
+                },
+                "identifier": [
+                    {
+                        "system": "http://goodcare.org/observation/id",
+                        "value": "o1223435-10"
+                    }
+                ],
+                "partOf": [
+                    {
+                        "reference": "Procedure/ob"
+                    }
+                ],
+                "status": "final",
+                "category": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                                "code": "vital-signs",
+                                "display": "Vital Signs"
+                            }
+                        ],
+                        "text": "Vital Signs"
+                    }
+                ],
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://loinc.org",
+                            "code": "2708-6",
+                            "display": "Oxygen saturation in Arterial blood"
+                        },
+                        {
+                            "system": "http://loinc.org",
+                            "code": "59408-5",
+                            "display": "Oxygen saturation in Arterial blood by Pulse oximetry"
+                        },
+                        {
+                            "system": "urn:iso:std:iso:11073:10101",
+                            "code": "150456",
+                            "display": "MDC_PULS_OXIM_SAT_O2"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/1"
+                },
+                "effectiveDateTime": "2021-01-05T09:30:10+01:00",
+                "valueQuantity": {
+                    "value": 99,
+                    "unit": "%",
+                    "system": "http://unitsofmeasure.org",
+                    "code": "%"
+                },
+                "interpretation": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                                "code": "N",
+                                "display": "Normal"
+                            }
+                        ],
+                        "text": "Normal (applies to non-numeric results)"
+                    }
+                ],
+                "device": {
+                    "reference": "DeviceMetric/example"
+                },
+                "referenceRange": [
+                    {
+                        "low": {
+                            "value": 90,
+                            "unit": "%",
+                            "system": "http://unitsofmeasure.org",
+                            "code": "%"
+                        },
+                        "high": {
+                            "value": 99,
+                            "unit": "%",
+                            "system": "http://unitsofmeasure.org",
+                            "code": "%"
+                        }
+                    }
+                ]
+            },
+            "request": {
+                "method": "POST",
+                "url": "Observation"
+            }
+        }
+    ]
+}
+
+
+-----------------------------
+
+〇演習資料P27　Patient/1/$everythingのGET要求
+
+・URL
+http://localhost:52773/csp/healthshare/r4fhirnamespace/fhir/r4/Patient/1/$everything
+
+・HeadersのKey
+Accept
+
+・HeadersのValue
+application/json+fhir
+
+
+-----------------------------
+
+〇演習資料P30　サンプルWebアプリケーションへのアクセス
+
+http://localhost:52773/csp/healthshare/r4fhirnamespace/patientlist.html
+
+
+-----------------------------
+
+〇演習資料P34　単純検索（GET要求）
+
+・URL
+http://localhost:52773/csp/healthshare/r4fhirnamespace/fhir/r4/Patient?family=山田&given=太郎
+
+・HeadersのKey
+Accept
+
+・HeadersのValue
+application/fhir+json
+
+
+※　以降の検索時のHeadersの情報は一緒
+
+
+-----------------------------
+
+〇演習資料P35　Observationリソースの設定値が98%以上を取得する
+http://localhost:52773/csp/healthshare/r4fhirnamespace/fhir/r4/Observation?value-quantity=ge98
+
+
+
+-----------------------------
+
+〇演習資料P36　オペレーション検索（$everything）
+http://localhost:52773/csp/healthshare/r4fhirnamespace/fhir/r4/Patient/1/$everything
+
+
+〇演習資料P36　オペレーション検索（$lastn）
+http://localhost:52773/csp/healthshare/r4fhirnamespace/fhir/r4/Observation/$lastn?patient=1&code=59408-5&max=2
+PatientリソースのID=1に関連する情報で、code=59408-5の検査結果直近2件の情報を返します。
+
+-----------------------------
+
+〇演習資料P38　コンパートメント検索
+http://localhost:52773/csp/healthshare/r4fhirnamespace/fhir/r4/Patient/1/Observation?code=59408-5&value-quantity=le95
+
+
+-----------------------------
+
+〇演習資料P39　連鎖検索：Observationリソースの検索パラメータであるsubjectを利用し、指定患者名に関連したObservationリソースを取得
+
+http://localhost:52773/csp/healthshare/r4fhirnamespace/fhir/r4/Observation?subject:Patient.name=山田
+
+
+-----------------------------
+
+〇演習資料P40　逆連鎖検索：_hasを利用して、特定の検索情報を持つ患者リソースを取得
+
+http://localhost:52773/csp/healthshare/r4fhirnamespace/fhir/r4/Patient?_has:Observation:patient:code=59408-5
+
+
+-----------------------------
+
+〇演習資料P41　関連リソース：Observationの参照先であるPatientリソースを _includeを使用して指定
+
+http://localhost:52773/csp/healthshare/r4fhirnamespace/fhir/r4/Observation?date=eq2021-01-05&_include=Observation:patient
+
+
+-----------------------------
+
+〇演習資料P41　関連リソース：対象のPatientリソースと関連を持つObservationリソースを取得するため、_revincludeを使用しています。
+ 
+http://localhost:52773/csp/healthshare/r4fhirnamespace/fhir/r4/Patient?identifier=1001&_revinclude=Observation:patient
+
+
+-----------------------------
+
+〇演習資料P49 FHIRエンドポイントの変更（Service Config Nameに以下名称を設定）
+
+HS.FHIRServer.Interop.Service
+
+
+-----------------------------
+
+〇演習資料P67
+http://localhost:52774/csp/healthshare/fhirserver/fhir/r4/Patient
+
+
+-----------------------------
+
+〇演習資料P69
+
+http://localhost:52774/csp/healthshare/fhirserver/fhir/r4/Observation
+
+
+-----------------------------
+
+〇演習資料P70
+http://localhost:52774/csp/healthshare/fhirserver/fhir/r4/Observation?subject:Patient.identifier=191922
+
+http://localhost:52774/csp/healthshare/fhirserver/fhir/r4/Observation?subject:Patient.name=鈴木
+
+
+-----------------------------
+
+〇演習資料P73
+
+http://localhost:52774/csp/healthshare/fhirserver/fhir/r4/Patient
+
+
+-----------------------------
+
+〇演習資料P74
+
+http://localhost:52774/csp/healthshare/fhirserver/fhir/r4/Patient?family=山田
+
+
+-----------------------------
+
+〇演習資料P76
+
+http://localhost:52774/csp/healthshare/fhirserver/fhir/r4/AllergyIntolerance?patient=9
+
+
+-----------------------------
+
+〇演習資料P77
+
+http://localhost:52774/csp/healthshare/fhirserver/fhir/r4/Observation?patient=9
+
+
+-----------------------------
+
+〇演習資料P79
+
+http://localhost:52774/csp/healthshare/fhirserver/fhir/r4/MedicationStatement?subject:Patient=9
+
+http://localhost:52774/csp/healthshare/fhirserver/fhir/r4/MedicationStatement?subject:Patient.family=山田
+
